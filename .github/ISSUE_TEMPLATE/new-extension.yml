@@ -1,0 +1,54 @@
+name: "Add New Extension"
+description: "Submit a Claude Code extension (skill, hook, MCP server, plugin, proxy) for audit"
+title: "[New]: "
+labels: ["new-extension", "needs-review"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Extension Name
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: GitHub Repository URL
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Extension Type
+      options:
+        - Skill (.claude/commands/*.md)
+        - Hook (settings.json hook)
+        - MCP Server
+        - Plugin (bundled skill+hook+MCP)
+        - Proxy (API MITM)
+        - Config Bundle
+        - Binary Patcher
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: telemetry
+    attributes:
+      label: Telemetry Found?
+      options:
+        - "Yes"
+        - "No"
+        - "Suspicious but unconfirmed"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: File paths, code snippets, network captures
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risk Assessment
+      description: What access does this extension have? What could go wrong?

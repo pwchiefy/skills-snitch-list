@@ -1,0 +1,37 @@
+name: "Dispute a Finding"
+description: "For extension authors who believe an entry is inaccurate"
+title: "[Dispute]: "
+labels: ["dispute", "priority"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Extension Name
+    validations:
+      required: true
+  - type: input
+    id: role
+    attributes:
+      label: Your Relationship to the Extension
+      placeholder: "e.g., Maintainer, contributor"
+    validations:
+      required: true
+  - type: textarea
+    id: current-claim
+    attributes:
+      label: What We Currently Say
+    validations:
+      required: true
+  - type: textarea
+    id: correct-info
+    attributes:
+      label: What Is Actually Correct (with evidence)
+    validations:
+      required: true
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: Acknowledgment
+      options:
+        - label: "I understand findings will be independently verified before updating"
+          required: true

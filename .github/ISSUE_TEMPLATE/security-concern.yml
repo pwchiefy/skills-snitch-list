@@ -1,0 +1,42 @@
+name: "Report Security Concern"
+description: "Report a security issue in a Claude Code extension"
+title: "[Security]: "
+labels: ["security", "priority"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Extension Name
+    validations:
+      required: true
+  - type: dropdown
+    id: concern-type
+    attributes:
+      label: Type of Concern
+      multiple: true
+      options:
+        - Telemetry / analytics phoning home
+        - Data exfiltration
+        - Credential harvesting
+        - Arbitrary code execution
+        - Permission bypass
+        - Self-modifying behavior
+        - Undisclosed network calls
+        - Supply chain risk
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details and Evidence
+    validations:
+      required: true
+  - type: dropdown
+    id: notified
+    attributes:
+      label: Has the extension author been notified?
+      options:
+        - "Yes"
+        - "No"
+        - "Not applicable (author is the concern)"
