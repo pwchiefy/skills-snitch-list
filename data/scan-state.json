@@ -1,0 +1,29 @@
+{
+  "lastScanDate": "2026-03-23T18:47:22.902Z",
+  "lastKnownTags": {
+    "wonderwhy-er/DesktopCommanderMCP": "v0.2.38",
+    "CursorTouch/Windows-MCP": "v0.7.0",
+    "getsentry/XcodeBuildMCP": "v2.3.0",
+    "asklokesh/claudeskill-loki-mode": "v6.66.0",
+    "obra/superpowers": "v5.0.5",
+    "Piebald-AI/tweakcc": "v4.0.11",
+    "thedotmack/claude-mem": "v10.6.2",
+    "musistudio/claude-code-router": "v2.0.0",
+    "sickn33/antigravity-awesome-skills": "v8.7.1",
+    "affaan-m/everything-claude-code": "v1.9.0",
+    "alirezarezvani/claude-skills": "v2.0.0",
+    "coreyhaines31/marketingskills": "v1.4.0",
+    "Jeffallan/claude-skills": "v0.4.10",
+    "numman-ali/openskills": "v1.5.0",
+    "JimLiu/baoyu-skills": "v1.79.1",
+    "zarazhangrui/frontend-slides": "v2.0.0"
+  },
+  "aggregatorHashes": {
+    "travisvn/awesome-claude-skills": "c4e0b95716c9910df120da6d4c26967c7b05824a9fb0bf55822d3c9f79cf6f8f",
+    "BehiSecc/awesome-claude-skills": "6612413d0caed4c2207ff3f7070e188fc2bd7a87a1448d82a766dd211d3b3593",
+    "ComposioHQ/awesome-claude-skills": "61982c2b76ae9723ed6715eb0c4d2a3b82c1290f4f998fb953762cc00b2b84ef",
+    "hesreallyhim/awesome-claude-code": "ebd1a62b8954b74b6c627db9e9bde6e438656a51c0b37a89e8e25bc51cb78ed7",
+    "VoltAgent/awesome-agent-skills": "06d15dc46c3f57575cbf9facdeb0eca4a1c49709453d01789562c008d78621ff",
+    "affaan-m/everything-claude-code": "1fa4c6eb004633b8c4ada77d44eddcddb0ad5e6a833c93bed90fa484c08a92a4"
+  }
+}

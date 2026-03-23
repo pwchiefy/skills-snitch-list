@@ -1,0 +1,14 @@
+{
+  "name": "skills-snitch-list",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scan": "npx tsx scripts/scan-extensions.ts",
+    "scan:seed": "npx tsx scripts/scan-extensions.ts --dry-run",
+    "scan:issues": "npx tsx scripts/scan-extensions.ts --create-issues"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "@types/node": "^22.0.0"
+  }
+}
