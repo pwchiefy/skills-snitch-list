@@ -2,7 +2,7 @@
 
 **is your skill snitching on you?**
 
-A community-maintained security audit of the Claude Code extension ecosystem — skills, hooks, MCP servers, plugins, proxies, and more.
+A community-maintained security audit of the Agentic Engineering / Task Management ecosystem — skills, hooks, MCP servers, plugins, proxies, and more.
 
 Companion to [agent-snitch-list](https://github.com/pwchiefy/agent-snitch-list).
 
@@ -30,19 +30,15 @@ Companion to [agent-snitch-list](https://github.com/pwchiefy/agent-snitch-list).
 
 ## Origin Story
 
-We were auditing AI coding tools for telemetry (see [agent-snitch-list](https://github.com/pwchiefy/agent-snitch-list)) when someone asked a question we hadn't considered: **what about the skills people install?**
-
-Claude Code, Cline, and the broader AI coding agent ecosystem have exploded with third-party extensions — skills, hooks, MCP servers, plugins, proxies, config bundles. Thousands of repos. Millions of installs. An entirely new software supply chain that runs with the same permissions as your terminal.
-
-We started with **[garrytan/gstack](https://github.com/garrytan/gstack)** — Garry Tan's popular Claude Code setup (41K stars). We found it sends skill usage data to Supabase. Local logging is always on. That made us wonder: what else is out there?
-
-We audited **200+ repos** across the entire ecosystem. What we found was far bigger than telemetry.
+-Lot's of popular skills out there - wanted to try one. Did a review and found telemetry. Was not expecting that! So we did a review. 
 
 **Telemetry is the least of the concerns.**
 
 Skills can instruct Claude to run arbitrary bash commands. Hooks execute shell scripts on every tool event. MCP servers are persistent processes with full system access. Proxies sit between you and the API, seeing every prompt, every response, every line of code, every API key. And all of it installs with a single command — no review, no sandbox, no permission prompt.
 
-This project documents what we found so you can make informed decisions about what you install.
+This project documents what we found so you can make informed decisions about what you install. 
+
+The primary audience is non-technical domain experts / knowledge workers who want to use tools like Claude Code to help them get things done faster. 
 
 ---
 
@@ -99,6 +95,23 @@ This is not theoretical. Attacks against the AI coding agent extension ecosystem
 
 ---
 
+## Privacy Champions 🏆
+
+ zero telemetry, clean architecture, and respect for the user's
+
+| Extension | Stars | Why It's Clean |
+|-----------|-------|----------------|
+| **[obra/superpowers](https://github.com/nichochar/superpower-chatgpt)** | 107K | Massive skill collection with zero telemetry. No analytics dependencies. No network calls. Pure markdown skills that do exactly what they say. |
+| **[mattpocock/skills](https://github.com/mattpocock/skills)** | 9K | TypeScript-focused skills from a trusted educator. Clean, minimal, no tracking. Each skill is a single readable `.md` file. |
+| **[kepano/obsidian-skills](https://github.com/kepano/obsidian-skills)** | 16K | Obsidian integration skills from kepano (Obsidian CEO). No telemetry, no network access, well-documented behavior. |
+| **[Cline](https://github.com/cline/cline)** (as a tool) | 38K | When used as an MCP tool, Cline has zero telemetry. Open source, auditable, and one of the few agents that got privacy right from day one. |
+| **[anthropics/skills](https://github.com/anthropics/skills)** | — | Official Anthropic skills. If you can't trust the vendor's own skills, who can you trust? Clean, documented, no telemetry. |
+| **[trailofbits/skills](https://github.com/trailofbits/skills)** | — | Security skills from Trail of Bits — one of the most respected security firms in the industry. Naturally, zero tracking. |
+
+**The pattern:** Privacy champions tend to be individuals with reputations to protect, security firms, or the vendor itself. The moment a VC-backed startup enters the ecosystem, tracking follows.
+
+---
+
 ## Top 20 Highest-Risk Extensions
 
 Ranked by **(popularity x risk severity)**. High stars + critical access = top of the list. This is not a "malicious" list — these are popular, often well-intentioned projects. But popularity without scrutiny is how supply chain attacks scale.
@@ -108,7 +121,7 @@ Ranked by **(popularity x risk severity)**. High stars + critical access = top o
 | 1 | **[openclaw/openclaw](https://github.com/openclaw/openclaw)** | 332K | Marketplace/Daemon | Always-on background daemon with full system access. Installs skills from community marketplace with no code review. The npm of Claude Code — and [already targeted](https://repello.ai/blog/clawhavoc-campaign-analysis). |
 | 2 | **[affaan-m/everything-claude-code](https://github.com/AffaanM/everything-claude-code)** | 101K | Meta-bundle | Modifies every layer: skills, hooks, MCP servers, and Claude config. One install changes your entire security posture. |
 | 3 | **[VoltAgent/awesome-openclaw-skills](https://github.com/VoltAgent/awesome-openclaw-skills)** | 41K | Curated list | 5,400+ skills indexed for the OpenClaw daemon. Curated does not mean audited — several ClawHavoc payloads were listed here before removal. |
-| 4 | **[garrytan/gstack](https://github.com/garrytan/gstack)** | 41K | Skills/Plugin | Celebrity trust amplifier. 41K stars because Garry Tan posted it. Supabase telemetry. Local logging always on. Users install without reading because of who made it. |
+| 4 | **[garrytan/gstack](https://github.com/garrytan/gstack)** | 41K | Skills/Plugin | Celebrity trust amplifier. Supabase telemetry. Local logging always on. Users install without reading because of who made it. |
 | 5 | **[thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)** | 40K | MCP Server | Captures ALL agent actions — every tool call, every file read, every bash command — and stores them persistently. A complete audit trail of everything you do, accessible to any process that can read the storage file. |
 | 6 | **[gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done)** | 40K | Meta-prompt/Config | Meta-prompting layer that modifies all Claude requests. Injects system instructions that alter Claude's behavior, including how it handles permissions and safety checks. |
 | 7 | **[wshobson/agents](https://github.com/wshobson/agents)** | 32K | Multi-agent framework | Autonomous multi-agent workflows. Agents spawn sub-agents that make their own tool calls. The blast radius of a single compromised skill multiplies across the agent graph. |
@@ -130,24 +143,7 @@ Ranked by **(popularity x risk severity)**. High stars + critical access = top o
 
 ---
 
-## Privacy Champions 🏆
-
-These projects do it right: zero telemetry, clean architecture, and respect for the developer's machine.
-
-| Extension | Stars | Why It's Clean |
-|-----------|-------|----------------|
-| **[obra/superpowers](https://github.com/nichochar/superpower-chatgpt)** | 107K | Massive skill collection with zero telemetry. No analytics dependencies. No network calls. Pure markdown skills that do exactly what they say. |
-| **[mattpocock/skills](https://github.com/mattpocock/skills)** | 9K | TypeScript-focused skills from a trusted educator. Clean, minimal, no tracking. Each skill is a single readable `.md` file. |
-| **[kepano/obsidian-skills](https://github.com/kepano/obsidian-skills)** | 16K | Obsidian integration skills from kepano (Obsidian CEO). No telemetry, no network access, well-documented behavior. |
-| **[Cline](https://github.com/cline/cline)** (as a tool) | 38K | When used as an MCP tool, Cline has zero telemetry. Open source, auditable, and one of the few agents that got privacy right from day one. |
-| **[anthropics/skills](https://github.com/anthropics/skills)** | — | Official Anthropic skills. If you can't trust the vendor's own skills, who can you trust? Clean, documented, no telemetry. |
-| **[trailofbits/skills](https://github.com/trailofbits/skills)** | — | Security skills from Trail of Bits — one of the most respected security firms in the industry. Naturally, zero tracking. |
-
-**The pattern:** Privacy champions tend to be individuals with reputations to protect, security firms, or the vendor itself. The moment a VC-backed startup enters the ecosystem, tracking follows.
-
----
-
-## What You Should Do
+## What You Should Do - and if you are non-technical you can ask your clanker to help you or do it for you. Better than doing nothing. 
 
 Eight concrete steps to protect yourself in the Claude Code extension ecosystem.
 
@@ -196,7 +192,7 @@ In your `.claude/settings.json`:
 
 Even if a skill tricks Claude into trying to read your SSH keys, the deny rule will block it.
 
-### 4. 🐳 Never Run `--dangerously-skip-permissions` Outside Containers
+### 4. 🐳 Never Run `--dangerously-skip-permissions` Outside Containers - I know this is unrealistic because people who need to do things quickly will throw caution to the wind ;)
 
 The `--dangerously-skip-permissions` flag removes all permission prompts. Claude will execute any tool call without asking. This is only safe inside an ephemeral container with no access to your real filesystem, credentials, or network.
 
@@ -252,7 +248,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines, evidence standards, 
 
 ## References & Credits
 
-This project builds on the work of many researchers, security firms, and individuals. We cite everything.
+This project builds on the work of many researchers, security firms, and individuals.
 
 ### Vulnerability Research
 
