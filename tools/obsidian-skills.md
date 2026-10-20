@@ -4,47 +4,43 @@
 |-------|-------|
 | Repository | https://github.com/kepano/obsidian-skills |
 | Type | Skills |
-| Stars | 16K |
+| Stars | 50K |
 | Telemetry | No |
 | Default State | N/A |
 | Analytics Providers | None |
 | Disable Method | N/A |
 | Risk Level | SAFE |
-| Last Verified | 2026-03-23 |
+| Last Verified | 2026-10-20 |
 
 ## What It Does
 
-A collection of Claude Code skills by kepano (creator of the Minimal theme for Obsidian and Obsidian CEO). These are pure markdown instruction files that provide Claude with specialized knowledge for working with Obsidian vaults, note-taking workflows, and knowledge management patterns.
+Agent skills by kepano (Steph Ango, CEO of Obsidian) for working with Obsidian: Obsidian-flavored Markdown, Bases, JSON Canvas, the Obsidian CLI, plus `defuddle` (clean Markdown extraction from web pages) and `knap` (Markdown templating). Installable as a Claude Code plugin marketplace or via `npx skills add`.
 
 ## Telemetry Details
 
-No telemetry. These are pure markdown files with zero executable code.
-
-- No JavaScript, TypeScript, Python, or any other executable code
-- No package.json, no dependencies, no build steps
-- No network calls possible — markdown files cannot make HTTP requests
-- Files are read as static instructions by Claude Code's skill system
+No telemetry. The repository contains 15 files: `SKILL.md` files, reference markdown, a LICENSE, a README and two plugin manifest JSON files. No executable code or dependency manifest.
 
 ## Security Concerns
 
-Effectively none:
+Effectively none in the repository itself:
 
-- **Pure markdown:** The repository consists entirely of markdown files read as text instructions. No executable code exists
-- **Zero attack surface:** Markdown skills cannot perform telemetry, network calls, file operations, or system modifications on their own
-- **Trusted author:** kepano is a well-known figure in the Obsidian community (CEO of Obsidian), providing reasonable confidence in the content's intent
-- **Transparent content:** All instructions are human-readable markdown, fully auditable by reading the files
-- **No dependencies:** No package manager, no dependency tree, no third-party supply chain risk
+- **Pure markdown and manifests:** No scripts, no dependencies
+- **Skills install CLIs on demand:** The `defuddle` and `knap` skills tell the agent to run `npm install -g defuddle` / `npm install -g knap` if missing, and `defuddle parse <url>` fetches web pages. Those are separate npm packages with their own code and network behavior, outside this audit
+- **Installer telemetry (third party):** The README's `npx skills add` install path uses Vercel Labs' `skills` CLI, which sends anonymous telemetry to `skills.sh` by default (disable with `DISABLE_TELEMETRY=1` or `DO_NOT_TRACK=1`). The `/plugin marketplace add` path does not involve that CLI
+- **Trusted author, transparent content:** Short, readable instructions
 
 ## How to Opt Out
 
-No opt-out needed — no telemetry or executable code exists.
+No opt-out needed for the skills. If you install with `npx skills`, set `DISABLE_TELEMETRY=1` or `DO_NOT_TRACK=1` first.
 
 ## Evidence
 
-- Repository contains only markdown (`.md`) files
-- No `package.json`, `requirements.txt`, `Cargo.toml`, or any dependency manifest
-- No executable code of any kind
-- Skills are loaded as read-only text instructions by Claude Code
+- Repository HEAD reviewed: [`3ccff533`](https://github.com/kepano/obsidian-skills/tree/3ccff5338ea700537839b21900aa5358a0402c98) (2026-09-15). File inventory via GitHub tree API: 12 `.md`, 2 `.json`, LICENSE
+- npm install instructions: [skills/defuddle/SKILL.md](https://github.com/kepano/obsidian-skills/blob/3ccff5338ea700537839b21900aa5358a0402c98/skills/defuddle/SKILL.md), [skills/knap/SKILL.md](https://github.com/kepano/obsidian-skills/blob/3ccff5338ea700537839b21900aa5358a0402c98/skills/knap/SKILL.md)
+- Install methods: [README.md#L5-L23](https://github.com/kepano/obsidian-skills/blob/3ccff5338ea700537839b21900aa5358a0402c98/README.md#L5-L23)
+- `skills` CLI telemetry: [vercel-labs/skills README.md#L102-L106](https://github.com/vercel-labs/skills/blob/a80e4c9d12d607631249d4d7d059f835d4b2f13a/README.md#L102-L106)
+- Star count: GitHub API, 49,807 on 2026-10-20
 
 ## Changelog
 - 2026-03-23: Initial entry
+- 2026-10-20: Re-verified at 3ccff533. Still no telemetry or executable code. Noted new `defuddle` and `knap` skills that install global npm CLIs on demand, and the third-party `npx skills` installer telemetry. Stars 16K -> 50K.

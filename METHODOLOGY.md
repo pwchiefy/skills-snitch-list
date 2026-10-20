@@ -4,7 +4,7 @@ This document describes how extensions in the Skills Snitch List are identified,
 
 ## Scope
 
-This project audits **Claude Code extensions** — skills, hooks, MCP servers, plugins, proxies, and configuration overlays — for telemetry, data collection, and security risks. It complements the [Agent Snitch List](https://github.com/anthropics/agent-snitch-list) (which covers AI coding agents themselves) by focusing on the extension ecosystem that plugs into those agents.
+This project audits **Claude Code extensions** — skills, hooks, MCP servers, plugins, proxies, and configuration overlays — for telemetry, data collection, and security risks. It complements the [Agent Snitch List](https://github.com/pwchiefy/agent-snitch-list) (which covers AI coding agents themselves) by focusing on the extension ecosystem that plugs into those agents.
 
 ## How Extensions Are Identified
 
@@ -212,7 +212,10 @@ Every audit is based on **reading the actual source code**, not the extension's 
 
 Extensions change. Audits are pinned to a specific commit hash and date. When an extension releases a new version:
 
-1. The existing audit remains in the repository, labeled with its commit hash.
-2. A new audit is created for the updated version.
-3. If the risk level changes, the main table in README.md is updated.
-4. Extension authors may request re-audit by filing an issue.
+1. The audit file in `tools/` is updated in place against the new pinned commit, and its `Last Verified` date changes only if the entry was actually re-checked against source.
+2. A dated line is appended to the file's `## Changelog` section describing what changed (or "re-verified, no change"). Earlier versions stay available in git history.
+3. If the risk level or telemetry status changes, the tables in README.md are updated.
+4. Weekly automated scans (`reports/`) flag commits, releases and new packages for review. A scan hit is a lead, not a finding. Nothing is published until a human reads the source.
+5. Extension authors may request re-audit by filing an issue.
+
+Last full re-verification of all entries: 2026-10-20.
