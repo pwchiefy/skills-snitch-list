@@ -1,55 +1,57 @@
-# Antigravity Awesome Skills
+# Antigravity Awesome Skills (now Agentic Awesome Skills)
 
 | Field | Value |
 |-------|-------|
-| Repository | https://github.com/sickn33/antigravity-awesome-skills |
+| Repository | https://github.com/sickn33/agentic-awesome-skills |
 | Type | Skills + CLI |
-| Stars | 27K |
-| Telemetry | Partial (Supabase in web app only, not in CLI installer) |
-| Default State | OFF (web app only) |
-| Analytics Providers | Supabase (web app component) |
-| Disable Method | Avoid the web app; CLI installer has no telemetry |
+| Stars | 48K |
+| Telemetry | Partial (Vercel Web Analytics and Supabase in the hosted catalog web app only; none in skills or CLI) |
+| Default State | ON for hosted catalog visitors; N/A for CLI and skills |
+| Analytics Providers | Vercel Web Analytics, Supabase (hosted catalog at aaskills.tech) |
+| Disable Method | Avoid the hosted catalog; the CLI installer and skills have no telemetry |
 | Risk Level | MEDIUM |
-| Last Verified | 2026-03-23 |
+| Last Verified | 2026-10-20 |
 
 ## What It Does
 
-Antigravity Awesome Skills is a collection of 1,304 skills for Claude Code, distributed with a CLI installer tool. It provides a large catalog of community-contributed skills spanning many development domains. The project includes both the skill files and a CLI tool for browsing and installing them. A companion web application exists for browsing the catalog online.
+A very large catalog of agent skills (about 2,700 `SKILL.md` files at the audited commit) with an npm CLI installer (`agentic-awesome-skills`), an `aas` CLI, an `aas-mcp` MCP server, plugin bundles for several agent hosts, and a hosted catalog web app at `aaskills.tech`. The repository was renamed from `sickn33/antigravity-awesome-skills` to `sickn33/agentic-awesome-skills` (old URL redirects). Version audited: 19.11.0.
 
 ## Telemetry Details
 
-- **Supabase in web app:** The web application component (for browsing skills online) uses Supabase for backend services and analytics. This tracks web visitors, skill popularity, and usage patterns
-- **CLI installer:** The CLI installer tool does NOT contain Supabase or any other telemetry. It operates locally and does not phone home
-- **Skill files:** The skill markdown files themselves contain no executable code or telemetry
-- **Separation of concerns:** The telemetry exists only in the web-facing component, not in the tools that developers actually install and run locally
+- **Hosted catalog:** Uses Vercel Web Analytics for aggregate visit statistics (the project strips query strings and URL fragments before analytics events) and Supabase for public, aggregate skill-save counts. Saved skills, shortlists and collections stay in browser local storage. This is new information versus March (Vercel Analytics was not listed then)
+- **CLI and installer:** Network calls go to GitHub (`git clone`, release `catalog.tgz` downloads) and `registry.npmjs.org` (version checks). No analytics libraries
+- **Skills and plugins:** PRIVACY.md (updated 2026-10-11) states skills-only plugins do not collect telemetry or transmit conversation content. Individual skills may describe third-party tools that have their own data practices
+- **Scanner hits:** Recent Supabase-related commits (e.g., the `@supabase/supabase-js` bump on 2026-10-18) touch the web app only
 
 ## Security Concerns
 
-- **1,304 skills is a large surface area:** With over a thousand skills, thorough review of every skill file is impractical. While skills are markdown (non-executable), a malicious skill could include instructions that manipulate Claude's behavior in harmful ways (prompt injection via skill content)
-- **CLI installer trust:** While the CLI has no telemetry, it installs files to your system. The installer must be trusted to only write the expected skill files to the expected locations
-- **Community-contributed content:** With 1,304 skills, many are likely contributed by different authors. The quality and safety review process for contributed skills is unclear
-- **Supabase in web app:** The web app component tracks usage via Supabase. Users browsing skills online should be aware their browsing patterns are recorded
-- **Supply chain at scale:** The sheer number of skills means that a single compromised skill file in an update could be difficult to detect through manual review
+- **Large surface:** About 2,700 skills from many contributors; full review of every skill is impractical. A malicious or careless skill can still instruct the agent to run harmful commands
+- **Installer trust:** The CLI clones the repo and writes skill files into agent config directories. Install only the skills you need
+- **New MCP server:** `aas-mcp` adds a persistent MCP process to the trust surface; we did not audit it in depth for this update
+- **Hosted catalog:** Visitors are measured by Vercel Web Analytics; search text is part of the navigation URL and browser history
+- **Supply chain at scale:** One compromised skill in a bulk update would be hard to spot manually
 
 ## How to Opt Out
 
-For Supabase telemetry:
-1. Use the CLI installer instead of the web app to browse and install skills
-2. The CLI has no telemetry — no additional configuration needed
+For hosted-catalog analytics:
+1. Browse and install with the CLI or directly from GitHub instead of `aaskills.tech`
 
 General risk mitigation:
-1. Review skills before installing — they are readable markdown files
-2. Install only the specific skills you need rather than the entire collection
-3. Pin to a specific version of the CLI installer
-4. Periodically audit installed skill files for unexpected content
+1. Read each skill before installing; install individual skills, not the whole catalog
+2. Pin the CLI version and review release diffs
+3. Periodically audit installed skill files for unexpected content
 
 ## Evidence
 
-- Supabase integration present in web application code only
-- CLI installer source code contains no analytics libraries or outbound network calls (beyond fetching skill files)
-- Skill files are markdown with no executable code
-- 1,304 skills in the collection as of last review
-- Clear separation between web app (has Supabase) and CLI tool (no telemetry)
+- Audited commit: [`c808e6e4`](https://github.com/sickn33/agentic-awesome-skills/tree/c808e6e480696d243e0668ebbc3499bb8e7e10a4) (2026-10-19, package.json 19.11.0)
+- Privacy policy (plugins collect no telemetry; catalog uses Vercel Web Analytics, Supabase): [PRIVACY.md](https://github.com/sickn33/agentic-awesome-skills/blob/c808e6e480696d243e0668ebbc3499bb8e7e10a4/PRIVACY.md)
+- CLI binaries: [package.json#L117-L121](https://github.com/sickn33/agentic-awesome-skills/blob/c808e6e480696d243e0668ebbc3499bb8e7e10a4/package.json#L117-L121)
+- CLI network destinations: [tools/bin/install.js#L12-L13](https://github.com/sickn33/agentic-awesome-skills/blob/c808e6e480696d243e0668ebbc3499bb8e7e10a4/tools/bin/install.js#L12-L13), [tools/lib/aas-v1/cache/catalog-release.js#L53](https://github.com/sickn33/agentic-awesome-skills/blob/c808e6e480696d243e0668ebbc3499bb8e7e10a4/tools/lib/aas-v1/cache/catalog-release.js#L53), [tools/lib/aas-v1/cache/update.js#L14](https://github.com/sickn33/agentic-awesome-skills/blob/c808e6e480696d243e0668ebbc3499bb8e7e10a4/tools/lib/aas-v1/cache/update.js#L14)
+- Supabase in web app: [apps/web-app/src/context/SkillContext.tsx#L3](https://github.com/sickn33/agentic-awesome-skills/blob/c808e6e480696d243e0668ebbc3499bb8e7e10a4/apps/web-app/src/context/SkillContext.tsx#L3)
+- Skill count: `find skills -name SKILL.md | wc -l` = 2,717 at the audited commit
+- Repository rename: `GET /repos/sickn33/antigravity-awesome-skills` resolves to `sickn33/agentic-awesome-skills` (GitHub API, 2026-10-20)
+- Star count: GitHub API, 48,042 on 2026-10-20
 
 ## Changelog
 - 2026-03-23: Initial entry
+- 2026-10-20: Re-verified at c808e6e4 (v19.11.0). Repository renamed to sickn33/agentic-awesome-skills (redirects). Skill count 1,304 -> about 2,700. Hosted catalog now documents Vercel Web Analytics in addition to Supabase; CLI and skills still have no telemetry. Noted new `aas` CLI and `aas-mcp` server. Stars 27K -> 48K.
